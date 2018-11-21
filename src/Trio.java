@@ -1,31 +1,35 @@
 
 public class Trio {
     private Sandwich sandwich;
-    private Drink drink;
     private Salad salad;
-    private double price;
+    private Drink drink;
     private String name;
-    public Trio(Sandwich sandwitch, Salad salad, Drink drink) {
+
+    public Trio(Sandwich sandwich, Salad salad, Drink drink) {
         this.sandwich = sandwich;
-        this.drink = drink;
         this.salad = salad;
-        this.name = sandwich.getName() + "/" + salad.getName() + "/" + drink.getName();
-        this.price = getPrice();
+        this.drink = drink;
     }
-    public double getPrice(){
-        double sandwichPrice = this.sandwich.getPrice();
-        double saladPrice = this.salad.getPrice();
-        double drinkPrice = this.drink.getPrice();
-        if(sandwichPrice > drinkPrice){
-            if(drinkPrice > saladPrice){
-                return sandwichPrice + drinkPrice;
+
+    public String getName() {
+        return sandwich.getName() + "/" + salad.getName() + "/" + drink.getName() + " Trio";
+    }
+
+    public double getPrice() {
+        double sandwich = this.sandwich.getPrice();
+        double salad = this.salad.getPrice();
+        double drink = this.drink.getPrice();
+
+        if (sandwich > drink) {
+            if (drink > salad) {
+                return sandwich + drink;
+            } else {
+                return sandwich + salad;
             }
-            else return saladPrice + saladPrice;
+        } else if (sandwich > salad) {
+            return sandwich + drink;
+        } else {
+            return salad + drink;
         }
-        else if(sandwichPrice > saladPrice){
-            return  sandwichPrice + drinkPrice;
-        }
-        else return saladPrice + drinkPrice;
     }
-    public String getName() {return this.name;}
 }
